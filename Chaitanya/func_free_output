@@ -1,0 +1,31 @@
+python func_free.py g
+              total        used        free      shared  buff/cache   available
+Mem:              7           1           4           0           1           5
+Swap:             6           0           6
+
+
+
+
+[cnair@localhost Project]$ python func_free.py t
+              total        used        free      shared  buff/cache   available
+Mem:        8096268     1630908     4674964      560892     1790396     5804172
+Swap:       6815740           0     6815740
+Total:     14912008     1630908    11490704
+
+
+
+[cnair@localhost Project]$ python func_free.py m
+              total        used        free      shared  buff/cache   available
+Mem:           7906        1593        4573         538        1739        5676
+Swap:          6655           0        6655
+
+
+
+[cnair@localhost Project]$ python func_free.py k
+              total        used        free      shared  buff/cache   available
+Mem:        8096268     1631820     4683256      551672     1781192     5812496
+Swap:       6815740           0     6815740
+[cnair@localhost Project]$ 
+
+
+

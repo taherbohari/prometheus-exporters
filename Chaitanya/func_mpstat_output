@@ -1,0 +1,39 @@
+[cnair@localhost Project]$ python func_mpstat.py 0
+Linux 4.1.13-100.fc21.x86_64 (localhost.localdomain) 	10/02/2017 	_x86_64_(4 CPU)
+
+08:58:47 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+08:58:47 PM    0    2.28    0.00    0.76    0.83    0.00    0.06    0.00    0.00    0.00   96.06
+-----------------------------------------------------------------------------------------------------
+
+[cnair@localhost Project]$ python func_mpstat.py 1
+Linux 4.1.13-100.fc21.x86_64 (localhost.localdomain) 	10/02/2017 	_x86_64_	(4 CPU)
+
+09:24:49 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+09:24:49 PM    1    2.59    0.00    0.83    0.82    0.00    0.03    0.00    0.00    0.00   95.73
+
+-----------------------------------------------------------------------------------------------------
+[cnair@localhost Project]$ python func_mpstat.py 2
+Linux 4.1.13-100.fc21.x86_64 (localhost.localdomain) 	10/02/2017 	_x86_64_	(4 CPU)
+
+09:24:57 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+09:24:57 PM    2    2.72    0.00    0.69    1.05    0.00    0.04    0.00    0.00    0.00   95.49
+
+-----------------------------------------------------------------------------------------------------
+[cnair@localhost Project]$ python func_mpstat.py 3
+Linux 4.1.13-100.fc21.x86_64 (localhost.localdomain) 	10/02/2017 	_x86_64_	(4 CPU)
+
+09:25:03 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+09:25:03 PM    3    2.98    0.00    0.71    0.41    0.00    0.01    0.00    0.00    0.00   95.89
+[cnair@localhost Project]$ 
+
+----------------------------------------------------------------------------------------------------
+[cnair@localhost Project]$ python func_mpstat.py ALL
+Linux 4.1.13-100.fc21.x86_64 (localhost.localdomain) 	10/02/2017 	_x86_64_(4 CPU)
+
+08:58:54 PM  CPU    %usr   %nice    %sys %iowait    %irq   %soft  %steal  %guest  %gnice   %idle
+08:58:54 PM  all    2.55    0.00    0.73    0.76    0.00    0.04    0.00    0.00    0.00   95.92
+08:58:54 PM    0    2.28    0.00    0.76    0.83    0.00    0.06    0.00    0.00    0.00   96.06
+08:58:54 PM    1    2.46    0.00    0.81    0.80    0.00    0.04    0.00    0.00    0.00   95.89
+08:58:54 PM    2    2.61    0.00    0.66    1.00    0.00    0.04    0.00    0.00    0.00   95.68
+08:58:54 PM    3    2.85    0.00    0.69    0.39    0.00    0.01    0.00    0.00    0.00   96.06
+[cnair@localhost Project]$ 
