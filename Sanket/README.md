@@ -1,5 +1,5 @@
 
-# Working RAM Exporter
+# RAM Exporter
 
 STEP 1: Install prometheus_client
 
