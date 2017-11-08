@@ -44,9 +44,8 @@ class JsonCollector(object):
 if __name__ == '__main__':
   # Usage: json_exporter.py port endpoint
   start_http_server(int(sys.argv[1]))
-  #REGISTRY.register(JsonCollector(sys.argv[2], sys.argv[3]))
+  REGISTRY.register(JsonCollector(sys.argv[2], sys.argv[3]))
   json_collector = JsonCollector(sys.argv[2], sys.argv[3])
   #json_collector.collect()
   while True:
     json_collector.collect()
-    time.sleep(5)
