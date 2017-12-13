@@ -1,0 +1,84 @@
+[cnair@localhost Project]$ python func_df.py m
+Filesystem              1M-blocks  Used Available Use% Mounted on
+devtmpfs                     3943     0      3943   0% /dev
+tmpfs                        3954     4      3951   1% /dev/shm
+tmpfs                        3954     1      3953   1% /run
+tmpfs                        3954     0      3954   0% /sys/fs/cgroup
+/dev/mapper/fedora-root     39118  8880     28229  24% /
+tmpfs                        3954    31      3924   1% /tmp
+/dev/sda8                     477   115       334  26% /boot
+/dev/sda2                     256   112       145  44% /boot/efi
+/dev/mapper/fedora-home     19031  6534     11508  37% /home
+tmpfs                         791     1       791   1% /run/user/1000
+
+
+
+[cnair@localhost Project]$ python func_df.py k
+Filesystem              1K-blocks    Used Available Use% Mounted on
+devtmpfs                  4037080       0   4037080   0% /dev
+tmpfs                     4048132    3084   4045048   1% /dev/shm
+tmpfs                     4048132     988   4047144   1% /run
+tmpfs                     4048132       0   4048132   0% /sys/fs/cgroup
+/dev/mapper/fedora-root  40056192 9092404  28905960  24% /
+tmpfs                     4048132   30784   4017348   1% /tmp
+/dev/sda8                  487652  116927    341029  26% /boot
+/dev/sda2                  262144  114388    147756  44% /boot/efi
+/dev/mapper/fedora-home  19487200 6690516  11783744  37% /home
+tmpfs                      809628      40    809588   1% /run/user/1000
+
+
+[cnair@localhost Project]$ python func_df.py h
+Filesystem               Size  Used Avail Use% Mounted on
+devtmpfs                 3.9G     0  3.9G   0% /dev
+tmpfs                    3.9G  3.1M  3.9G   1% /dev/shm
+tmpfs                    3.9G  988K  3.9G   1% /run
+tmpfs                    3.9G     0  3.9G   0% /sys/fs/cgroup
+/dev/mapper/fedora-root   39G  8.7G   28G  24% /
+tmpfs                    3.9G   31M  3.9G   1% /tmp
+/dev/sda8                477M  115M  334M  26% /boot
+/dev/sda2                256M  112M  145M  44% /boot/efi
+/dev/mapper/fedora-home   19G  6.4G   12G  37% /home
+tmpfs                    791M   40K  791M   1% /run/user/1000
+[cnair@localhost Project]$ 
+
+
+
+[cnair@localhost Project]$ python func_df.py a
+Filesystem              1K-blocks    Used Available Use% Mounted on
+sysfs                           0       0         0    - /sys
+proc                            0       0         0    - /proc
+devtmpfs                  4037080       0   4037080   0% /dev
+securityfs                      0       0         0    - /sys/kernel/security
+tmpfs                     4048132    3084   4045048   1% /dev/shm
+devpts                          0       0         0    - /dev/pts
+tmpfs                     4048132     988   4047144   1% /run
+tmpfs                     4048132       0   4048132   0% /sys/fs/cgroup
+cgroup                          0       0         0    - /sys/fs/cgroup/systemd
+pstore                          0       0         0    - /sys/fs/pstore
+efivarfs                        0       0         0    - /sys/firmware/efi/efivars
+cgroup                          0       0         0    - /sys/fs/cgroup/cpuset
+cgroup                          0       0         0    - /sys/fs/cgroup/cpu,cpuacct
+cgroup                          0       0         0    - /sys/fs/cgroup/blkio
+cgroup                          0       0         0    - /sys/fs/cgroup/memory
+cgroup                          0       0         0    - /sys/fs/cgroup/devices
+cgroup                          0       0         0    - /sys/fs/cgroup/freezer
+cgroup                          0       0         0    - /sys/fs/cgroup/net_cls,net_prio
+cgroup                          0       0         0    - /sys/fs/cgroup/perf_event
+cgroup                          0       0         0    - /sys/fs/cgroup/hugetlb
+configfs                        0       0         0    - /sys/kernel/config
+/dev/mapper/fedora-root  40056192 9092404  28905960  24% /
+selinuxfs                       0       0         0    - /sys/fs/selinux
+systemd-1                       0       0         0    - /proc/sys/fs/binfmt_misc
+mqueue                          0       0         0    - /dev/mqueue
+debugfs                         0       0         0    - /sys/kernel/debug
+hugetlbfs                       0       0         0    - /dev/hugepages
+tmpfs                     4048132   30784   4017348   1% /tmp
+sunrpc                          0       0         0    - /var/lib/nfs/rpc_pipefs
+nfsd                            0       0         0    - /proc/fs/nfsd
+/dev/sda8                  487652  116927    341029  26% /boot
+/dev/sda2                  262144  114388    147756  44% /boot/efi
+/dev/mapper/fedora-home  19487200 6690748  11783512  37% /home
+tmpfs                      809628      56    809572   1% /run/user/1000
+fusectl                         0       0         0    - /sys/fs/fuse/connections
+gvfsd-fuse                      0       0         0    - /run/user/1000/gvfs
+[cnair@localhost Project]$ 

@@ -1,0 +1,66 @@
+[cnair@localhost Project]$ python func_vmstat.py f
+         9263 forks
+
+ python func_vmstat.py a
+procs -----------memory---------- ---swap-- -----io---- -system-- ------cpu-----
+ r  b   swpd   free  inact active   si   so    bi    bo   in   cs us sy id wa st
+ 1  0      0 5155036 738200 1708032    0    0     6    12  192  145  3  1 96  1  0
+
+
+[cnair@localhost Project]$ python func_vmstat.py d
+disk- ------------reads------------ ------------writes----------- -----IO------
+       total merged sectors      ms  total merged sectors      ms    cur    sec
+sda    41534   6446 1791725  923443  92407  92790 3449517 3478870      0    981
+sr0        0      0       0       0      0      0       0       0      0      0
+dm-0   30301      0 1547370 1312270  35403      0  598296 1721463      0    237
+dm-1     153      0    2360    3762      0      0       0       0      0      3
+dm-2   14723      0  220120   99969 143110      0 2851144 3414029      0    781
+
+
+
+
+[cnair@localhost Project]$ python func_vmstat.py D
+            5 disks 
+            9 partitions 
+        86711 total reads
+         6446 merged reads
+      3561575 read sectors
+      2339444 milli reading
+       270928 writes
+        92793 merged writes
+      6899037 written sectors
+      8614460 milli writing
+            0 inprogress IO
+         2002 milli spent IO
+
+
+
+[cnair@localhost Project]$ python func_vmstat.py s
+      8096268 K total memory
+      1621828 K used memory
+      1885876 K active memory
+      1017668 K inactive memory
+      4681408 K free memory
+       150396 K buffer memory
+      1642636 K swap cache
+      6815740 K total swap
+            0 K used swap
+      6815740 K free swap
+       387385 non-nice user cpu ticks
+          331 nice user cpu ticks
+       108358 system cpu ticks
+     13776327 idle cpu ticks
+       112692 IO-wait cpu ticks
+           11 IRQ cpu ticks
+         5280 softirq cpu ticks
+            0 stolen cpu ticks
+       895862 pages paged in
+      1725402 pages paged out
+            0 pages swapped in
+            0 pages swapped out
+     29077843 interrupts
+     70090336 CPU context switches
+   1506923848 boot time
+        10282 forks
+[cnair@localhost Project]$ 
+
