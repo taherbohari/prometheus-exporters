@@ -1,0 +1,34 @@
+ java -version
+ 
+ sudo apt-get install oracle-java8-installer
+ 
+ java -version
+ 
+ echo $JAVA_HOME
+
+wget -qO - https://packages.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+echo "deb http://packages.elastic.co/elasticsearch/2.x/debian stable main" | sudo tee -a /etc/apt/sources.list.d/elasticsearch-2.x.list
+
+sudo apt-get update
+
+sudo apt-get install elasticsearch
+
+sudo update-rc.d elasticsearch defaults
+
+sudo service elasticsearch start
+
+curl http://localhost:9200
+
+
+
+###################################################
+Links
+
+https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-elasticsearch-on-ubuntu-14-04
+
+https://gist.github.com/Globegitter/662713f90d5af5b4269d
+
+https://www.tutorialspoint.com/elasticsearch/elasticsearch_installation.htm
+
+https://www.elastic.co/guide/en/elasticsearch/reference/2.4/getting-started.html
