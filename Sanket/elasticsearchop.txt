@@ -1,0 +1,129 @@
+sanket@Sanket:~/GSLab/code$ curl localhost:1234
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 219811840.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 20635648.0
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1516260498.49
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 13.43
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 7.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1024.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="2",minor="7",patchlevel="12",version="2.7.12"} 1.0
+# HELP number_of_nodes Number of nodes
+# TYPE number_of_nodes summary
+number_of_nodes 1.0
+# HELP number_of_data_nodes Number of data nodes
+# TYPE number_of_data_nodes summary
+number_of_data_nodes 1.0
+# HELP active_primary_shards Number of active primary shards
+# TYPE active_primary_shards summary
+active_primary_shards 5.0
+# HELP active_shards Number of active shards
+# TYPE active_shards summary
+active_shards 5.0
+# HELP relocating_shards Number of relocating shards
+# TYPE relocating_shards summary
+relocating_shards 0.0
+# HELP initializing_shards Number of initializing shards
+# TYPE initializing_shards summary
+initializing_shards 0.0
+# HELP unassigned_shards Number of unassigned shards
+# TYPE unassigned_shards summary
+unassigned_shards 5.0
+# HELP delayed_unassigned_shards Number of delayed unassigned shards
+# TYPE delayed_unassigned_shards summary
+delayed_unassigned_shards 0.0
+# HELP number_of_pending_tasks Number of pending tasks
+# TYPE number_of_pending_tasks summary
+number_of_pending_tasks 0.0
+# HELP number_of_in_flight_fetch Number of in flight fetch
+# TYPE number_of_in_flight_fetch summary
+number_of_in_flight_fetch 0.0
+# HELP task_max_waiting_in_queue_millis Task max waiting in queue in milli seconds
+# TYPE task_max_waiting_in_queue_millis summary
+task_max_waiting_in_queue_millis 0.0
+# HELP active_shards_percent_as_number Percentage of active shards
+# TYPE active_shards_percent_as_number summary
+active_shards_percent_as_number 50.0
+# HELP indices_count Number of indices
+# TYPE indices_count summary
+indices_count 1.0
+# HELP indices_docs_count Total number of documents
+# TYPE indices_docs_count summary
+indices_docs_count 1000.0
+# HELP indices_docs_deleted Number of documents deleted
+# TYPE indices_docs_deleted summary
+indices_docs_deleted 0.0
+# HELP indices_store_size_bytes Total size aqupied by indices in bytes
+# TYPE indices_store_size_bytes summary
+indices_store_size_bytes 474713.0
+# HELP indices_fielddata_memory_size_in_bytes Fielddata memory size in bytes
+# TYPE indices_fielddata_memory_size_in_bytes summary
+indices_fielddata_memory_size_in_bytes 0.0
+# HELP nodes_count_total Number of nodes
+# TYPE nodes_count_total summary
+nodes_count_total 1.0
+# HELP nodes_count_master_only Number of master only nodes
+# TYPE nodes_count_master_only summary
+nodes_count_master_only 0.0
+# HELP nodes_count_data_only Number of data only nodes
+# TYPE nodes_count_data_only summary
+nodes_count_data_only 0.0
+# HELP nodes_count_master_data Number of master data nodes
+# TYPE nodes_count_master_data summary
+nodes_count_master_data 1.0
+# HELP nodes_count_client Number of clients
+# TYPE nodes_count_client summary
+nodes_count_client 0.0
+# HELP search_query_total Number of queries
+# TYPE search_query_total summary
+search_query_total 0.0
+# HELP search_query_time_in_milis Total time spent on queries
+# TYPE search_query_time_in_milis summary
+search_query_time_in_milis 0.0
+# HELP search_query_current Number of queries currently in progress
+# TYPE search_query_current summary
+search_query_current 0.0
+# HELP search_fetch_total Number of fetches
+# TYPE search_fetch_total summary
+search_fetch_total 0.0
+# HELP search_fetch_time_in_milis Total time spent on fetches
+# TYPE search_fetch_time_in_milis summary
+search_fetch_time_in_milis 0.0
+# HELP search_fetch_current Number of fetches currently in progress
+# TYPE search_fetch_current summary
+search_fetch_current 0.0
+# HELP indexed_docs_count Number of documents indexed
+# TYPE indexed_docs_count summary
+indexed_docs_count 0.0
+# HELP index_time_in_millis Time spent indexing documents
+# TYPE index_time_in_millis summary
+index_time_in_millis 0.0
+# HELP index_current Documents currently being indexed
+# TYPE index_current summary
+index_current 0.0
+# HELP refresh_total Number of index refreshes
+# TYPE refresh_total summary
+refresh_total 0.0
+# HELP refresh_total_time_in_millis Time spent refreshing indices
+# TYPE refresh_total_time_in_millis summary
+refresh_total_time_in_millis 0.0
+# HELP flush_total Number of index flushes to disk
+# TYPE flush_total summary
+flush_total 0.0
+# HELP flush_total_time_in_millis Time spent flushing indices
+# TYPE flush_total_time_in_millis summary
+flush_total_time_in_millis 0.0
+sanket@Sanket:~/GSLab/code$ 
+
