@@ -1,0 +1,84 @@
+sanket@Sanket:~$ wget -qO - https://artifacts.elastic.co/GPG-KEY-elasticsearch | sudo apt-key add -
+
+
+sanket@Sanket:~$ sudo apt-get install apt-transport-https
+
+
+sanket@Sanket:~$ echo "deb https://artifacts.elastic.co/packages/5.x/apt stable main" | sudo tee -a /etc/apt/sources.list.d/elastic-5.x.list
+
+
+sanket@Sanket:~$ sudo apt-get update && sudo apt-get install logstash
+
+
+sanket@Sanket:~$ sudo systemctl start logstash.service
+
+
+****************************************************************
+Make configue file in /etc/logstash/con.d
+
+filename: sample.conf
+
+input {
+    file {
+        path => "/var/log/syslog"
+        start_position => "beginning"
+        ignore_older => 0  
+    }
+}
+output {
+    file {
+        path => "/home/sanket/logop.txt"
+    }
+}
+
+*****************************************************************
+
+Monitoring API:
+//////////////////////// NODE INFO API   ////////////////////////////////////////
+
+
+root@Sanket:/home/sanket# curl -XGET 'localhost:9600/_node/pipeline,os,jvm?pretty'
+
+
+{
+  "host" : "Sanket",
+  "version" : "5.6.5",
+  "http_address" : "127.0.0.1:9600",
+  "id" : "a0c7f767-d95c-4e0a-88cb-cc700c5098ec",
+  "name" : "Sanket",
+  "pipeline" : {
+    "workers" : 8,
+    "batch_size" : 125,
+    "batch_delay" : 5,
+    "config_reload_automatic" : false,
+    "config_reload_interval" : 3,
+    "dead_letter_queue_enabled" : false,
+    "id" : "main"
+  },
+  "os" : {
+    "name" : "Linux",
+    "arch" : "amd64",
+    "version" : "4.10.0-28-generic",
+    "available_processors" : 8
+  },
+  "jvm" : {
+    "pid" : 3155,
+    "version" : "1.8.0_151",
+    "vm_version" : "1.8.0_151",
+    "vm_vendor" : "Oracle Corporation",
+    "vm_name" : "Java HotSpot(TM) 64-Bit Server VM",
+    "start_time_in_millis" : 1516252211977,
+    "mem" : {
+      "heap_init_in_bytes" : 268435456,
+      "heap_max_in_bytes" : 1037959168,
+      "non_heap_init_in_bytes" : 2555904,
+      "non_heap_max_in_bytes" : 0
+    },
+    "gc_collectors" : [ "ParNew", "ConcurrentMarkSweep" ]
+  }
+}root@Sanket:/home/sanket# 
+
+
+/////////////////////////////////////////////////////////////////
+
+
