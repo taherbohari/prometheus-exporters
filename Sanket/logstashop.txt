@@ -1,0 +1,147 @@
+sanket@Sanket:~/GSLab/code$ curl localhost:1235
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 219832320.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 20586496.0
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1516260199.04
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 7.94
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 7.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1024.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="2",minor="7",patchlevel="12",version="2.7.12"} 1.0
+# HELP threads_count Count of jvm threads
+# TYPE threads_count summary
+threads_count 32.0
+# HELP threads_peak_count Peak count of jvm threads
+# TYPE threads_peak_count summary
+threads_peak_count 33.0
+# HELP mem_heap_used_percent Used heap memory percentage
+# TYPE mem_heap_used_percent summary
+mem_heap_used_percent 8.0
+# HELP mem_heap_committed_in_bytes Heap committed in bytes
+# TYPE mem_heap_committed_in_bytes summary
+mem_heap_committed_in_bytes 259522560.0
+# HELP mem_heap_max_in_bytes Max heap size in bytes
+# TYPE mem_heap_max_in_bytes summary
+mem_heap_max_in_bytes 1037959168.0
+# HELP mem_heap_used_in_bytes Used heap size in bytes
+# TYPE mem_heap_used_in_bytes summary
+mem_heap_used_in_bytes 84009888.0
+# HELP mem_non_heap_used_in_bytes Not used heap size in bytes
+# TYPE mem_non_heap_used_in_bytes summary
+mem_non_heap_used_in_bytes 95838800.0
+# HELP mem_non_heap_committed_in_bytes Non heap committed in bytes
+# TYPE mem_non_heap_committed_in_bytes summary
+mem_non_heap_committed_in_bytes 95838800.0
+# HELP mem_pools_survivor_peak_used_in_bytes Peak memory used by survivor pools in bytes
+# TYPE mem_pools_survivor_peak_used_in_bytes summary
+mem_pools_survivor_peak_used_in_bytes 8912896.0
+# HELP mem_pools_survivor_used_in_bytes Memory used by survivor pools in bytes
+# TYPE mem_pools_survivor_used_in_bytes summary
+mem_pools_survivor_used_in_bytes 1039264.0
+# HELP mem_pools_survivor_peak_max_in_bytes Max peak Memory for survivor pools in bytes
+# TYPE mem_pools_survivor_peak_max_in_bytes summary
+mem_pools_survivor_peak_max_in_bytes 35782656.0
+# HELP mem_pools_survivor_max_in_bytes Total Max memory for survivor pools in bytes
+# TYPE mem_pools_survivor_max_in_bytes summary
+mem_pools_survivor_max_in_bytes 35782656.0
+# HELP mem_pools_survivor_committed_in_bytes Memory committed by survivor pools in bytes
+# TYPE mem_pools_survivor_committed_in_bytes summary
+mem_pools_survivor_committed_in_bytes 8912896.0
+# HELP mem_pools_old_peak_used_in_bytes Peak memory used by old pools in bytes
+# TYPE mem_pools_old_peak_used_in_bytes summary
+mem_pools_old_peak_used_in_bytes 115412416.0
+# HELP mem_pools_old_used_in_bytes Memory used by old pools in bytes
+# TYPE mem_pools_old_used_in_bytes summary
+mem_pools_old_used_in_bytes 58715632.0
+# HELP mem_pools_old_peak_max_in_bytes Max peak Memory for old pools in bytes
+# TYPE mem_pools_old_peak_max_in_bytes summary
+mem_pools_old_peak_max_in_bytes 715849728.0
+# HELP mem_pools_old_max_in_bytes Total Max memory for old pools in bytes
+# TYPE mem_pools_old_max_in_bytes summary
+mem_pools_old_max_in_bytes 715849728.0
+# HELP mem_pools_old_committed_in_bytes Memory committed by old pools in bytes
+# TYPE mem_pools_old_committed_in_bytes summary
+mem_pools_old_committed_in_bytes 178978816.0
+# HELP mem_pools_young_peak_used_in_bytes Peak memory used by young pools in bytes
+# TYPE mem_pools_young_peak_used_in_bytes summary
+mem_pools_young_peak_used_in_bytes 71630848.0
+# HELP mem_pools_young_used_in_bytes Memory used by young pools in bytes
+# TYPE mem_pools_young_used_in_bytes summary
+mem_pools_young_used_in_bytes 24254992.0
+# HELP mem_pools_young_peak_max_in_bytes Max peak Memory for young pools in bytes
+# TYPE mem_pools_young_peak_max_in_bytes summary
+mem_pools_young_peak_max_in_bytes 286326784.0
+# HELP mem_pools_young_max_in_bytes Total Max memory for young pools in bytes
+# TYPE mem_pools_young_max_in_bytes summary
+mem_pools_young_max_in_bytes 286326784.0
+# HELP mem_pools_young_committed_in_bytes Memory committed by young pools in bytes
+# TYPE mem_pools_young_committed_in_bytes summary
+mem_pools_young_committed_in_bytes 71630848.0
+# HELP gc_collectors_old_collection_count Total count of old generation garbage collections
+# TYPE gc_collectors_old_collection_count summary
+gc_collectors_old_collection_count 2.0
+# HELP gc_collectors_old_collection_time_in_millis Time spent on old generation garbage collections
+# TYPE gc_collectors_old_collection_time_in_millis summary
+gc_collectors_old_collection_time_in_millis 55.0
+# HELP gc_collectors_young_collection_count Total count of young generation garbage collections
+# TYPE gc_collectors_young_collection_count summary
+gc_collectors_young_collection_count 96.0
+# HELP gc_collectors_young_collection_time_in_millis Time spent on young generation garbage collections
+# TYPE gc_collectors_young_collection_time_in_millis summary
+gc_collectors_young_collection_time_in_millis 664.0
+# HELP jvm_uptime_in_millis Total running time of jvm in millis
+# TYPE jvm_uptime_in_millis summary
+jvm_uptime_in_millis 6486470.0
+# HELP process_open_file_descriptors Number of open file discriptors
+# TYPE process_open_file_descriptors summary
+process_open_file_descriptors 61.0
+# HELP process_peak_open_file_descriptors Number of peak open file discriptors
+# TYPE process_peak_open_file_descriptors summary
+process_peak_open_file_descriptors 61.0
+# HELP process_max_file_descriptors Number of max file discriptors
+# TYPE process_max_file_descriptors summary
+process_max_file_descriptors 16384.0
+# HELP process_mem_total_virtual_in_bytes Total virtual memory in bytes
+# TYPE process_mem_total_virtual_in_bytes summary
+process_mem_total_virtual_in_bytes 6179749888.0
+# HELP process_cpu_total_in_millis Total running time of cpu
+# TYPE process_cpu_total_in_millis summary
+process_cpu_total_in_millis 264020.0
+# HELP process_cpu_percent Percentage of cpu used
+# TYPE process_cpu_percent summary
+process_cpu_percent 0.0
+# HELP pipeline_events_duration_in_millis Total event duration in millis
+# TYPE pipeline_events_duration_in_millis summary
+pipeline_events_duration_in_millis 0.0
+# HELP pipeline_events_in Number of event in
+# TYPE pipeline_events_in summary
+pipeline_events_in 0.0
+# HELP pipeline_events_out Number of event out
+# TYPE pipeline_events_out summary
+pipeline_events_out 0.0
+# HELP pipeline_events_filtered Number of event filtered
+# TYPE pipeline_events_filtered summary
+pipeline_events_filtered 0.0
+# HELP pipeline_events_queue_push_duration_in_millis Time taken to push events in queue in millis
+# TYPE pipeline_events_queue_push_duration_in_millis summary
+pipeline_events_queue_push_duration_in_millis 0.0
+# HELP pipeline_reloads_successes Number of config reload successes
+# TYPE pipeline_reloads_successes summary
+pipeline_reload_successes 0.0
+# HELP pipeline_reloads_failures Number of config reload failures
+# TYPE pipeline_reloads_failures summary
+pipeline_reloads_failures 0.0
+sanket@Sanket:~/GSLab/code$ 
+
