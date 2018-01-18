@@ -167,6 +167,36 @@ class CustomCollector(object):
 		metric.add_sample('flush_total_time_in_millis',value=response['_all']['primaries']['flush']['total_time_in_millis'],labels={})
 		yield metric
 
+		#Garbage collection metrics 
+		'''response = json.loads(requests.get('http://localhost:9200/_nodes/_all/stats/jvm?pretty').content.decode('utf-8'))	
+		metric = Metric('gc_collectors_young_collection_count','Count of young-generation garbage collections','summary')
+		metric.add_sample('gc_collectors_young_collection_count',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['gc']['collectors']['young']['collection_count'],labels={})
+		yield metric
+
+		metric = Metric('gc_collectors_young_collection_time_in_millis','Time spent on young-generation garbage collections','summary')
+		metric.add_sample('gc_collectors_young_collection_time_in_millis',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['gc']['collectors']['young']['collection_time_in_millis'],labels={})
+		yield metric
+
+		metric = Metric('gc_collectors_old_collection_count','Count of old-generation garbage collections','summary')
+		metric.add_sample('gc_collectors_old_collection_count',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['gc']['collectors']['old']['collection_count'],labels={})
+		yield metric
+
+		metric = Metric('gc_collectors_old_collection_time_in_millis','Time spent on old-generation garbage collections','summary')
+		metric.add_sample('gc_collectors_old_collection_time_in_millis',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['gc']['collectors']['old']['collection_time_in_millis'],labels={})
+		yield metric
+
+		metric = Metric('jvm_mem_heap_used_in_bytes','Percent of JVM heap currently in use','summary')
+		metric.add_sample('jvm_mem_heap_used_in_bytes',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['mem']['heap_used_in_bytes'],labels={})
+		yield metric
+
+		metric = Metric('jvm_mem_heap_committed_in_bytes','Amount of JVM heap committed ','summary')
+		metric.add_sample('jvm_mem_heap_committed_in_bytes',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['mem']['heap_committed_in_bytes'],labels={})
+		yield metric
+
+		metric = Metric('jvm_mem_heap_committed_in_bytes','Amount of JVM heap committed ','summary')
+		metric.add_sample('jvm_mem_heap_committed_in_bytes',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['mem']['heap_committed_in_bytes'],labels={})
+		yield metric'''
+
 if __name__ == '__main__':
 	# pass port number as argument
     start_http_server(1234)
