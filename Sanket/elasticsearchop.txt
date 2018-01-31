@@ -1,25 +1,25 @@
 sanket@Sanket:~/GSLab/code$ curl localhost:1234
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="2",minor="7",patchlevel="12",version="2.7.12"} 1.0
 # HELP process_virtual_memory_bytes Virtual memory size in bytes.
 # TYPE process_virtual_memory_bytes gauge
-process_virtual_memory_bytes 219811840.0
+process_virtual_memory_bytes 220200960.0
 # HELP process_resident_memory_bytes Resident memory size in bytes.
 # TYPE process_resident_memory_bytes gauge
-process_resident_memory_bytes 20635648.0
+process_resident_memory_bytes 21073920.0
 # HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
 # TYPE process_start_time_seconds gauge
-process_start_time_seconds 1516260498.49
+process_start_time_seconds 1517412017.3
 # HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
 # TYPE process_cpu_seconds_total counter
-process_cpu_seconds_total 13.43
+process_cpu_seconds_total 17.29
 # HELP process_open_fds Number of open file descriptors.
 # TYPE process_open_fds gauge
 process_open_fds 7.0
 # HELP process_max_fds Maximum number of open file descriptors.
 # TYPE process_max_fds gauge
 process_max_fds 1024.0
-# HELP python_info Python platform information
-# TYPE python_info gauge
-python_info{implementation="CPython",major="2",minor="7",patchlevel="12",version="2.7.12"} 1.0
 # HELP number_of_nodes Number of nodes
 # TYPE number_of_nodes summary
 number_of_nodes 1.0
@@ -115,15 +115,18 @@ index_time_in_millis 0.0
 index_current 0.0
 # HELP refresh_total Number of index refreshes
 # TYPE refresh_total summary
-refresh_total 0.0
+refresh_total 5.0
 # HELP refresh_total_time_in_millis Time spent refreshing indices
 # TYPE refresh_total_time_in_millis summary
-refresh_total_time_in_millis 0.0
+refresh_total_time_in_millis 49.0
 # HELP flush_total Number of index flushes to disk
 # TYPE flush_total summary
-flush_total 0.0
+flush_total 5.0
 # HELP flush_total_time_in_millis Time spent flushing indices
 # TYPE flush_total_time_in_millis summary
-flush_total_time_in_millis 0.0
+flush_total_time_in_millis 8.0
+# HELP flush_latency flush total vs flush total time in millis
+# TYPE flush_latency summary
+flush_latency 0.0
 sanket@Sanket:~/GSLab/code$ 
 
