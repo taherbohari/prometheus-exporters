@@ -3,6 +3,7 @@ import sys
 import os
 import json
 import requests
+import argparse
 from pprint import pprint
 
 class CustomCollector(object):
@@ -134,9 +135,19 @@ class CustomCollector(object):
 		metric.add_sample('search_fetch_current',value=response['_all']['primaries']['search']['fetch_current'],labels={})
 		yield metric
 
-		'''metric = Metric('query_latency','Number of queries vs time spent on queries','summary')
-		metric.add_sample('query_latency',value=response['_all']['primaries']['search']['query_total']/response['_all']['primaries']['search']['query_time_in_millis'],labels={})
-		yield metric'''
+		try:
+			metric = Metric('query_latency','Number of queries vs time spent on queries','summary')
+			metric.add_sample('query_latency',value=response['_all']['primaries']['search']['query_total']/response['_all']['primaries']['search']['query_time_in_millis'],labels={})
+			yield metric
+		except ZeroDivisionError:
+			pass
+
+		try:
+			metric = Metric('fetch_latency','number of fetches vs time spent on fetches','summary')
+			metric.add_sample('query_latency',value=response['_all']['primaries']['search']['fetch_total']/response['_all']['primaries']['search']['fetch_time_in_millis'],labels={})
+			yield metric
+		except ZeroDivisionError:
+			pass
 
 		#metrics for index performance
 		metric = Metric('indexed_docs_count','Number of documents indexed','summary')
@@ -167,9 +178,24 @@ class CustomCollector(object):
 		metric.add_sample('flush_total_time_in_millis',value=response['_all']['primaries']['flush']['total_time_in_millis'],labels={})
 		yield metric
 
+		try:
+			metric = Metric('index_latency','index total vs index time in millis','summary')
+			metric.add_sample('index_latency',value=response['_all']['primaries']['indexing']['index_total']/response['_all']['primaries']['indexing']['index_time_in_millis'],labels={})
+			yield metric
+		except ZeroDivisionError:
+			pass
+
+		try:
+			metric = Metric('flush_latency','flush total vs flush total time in millis','summary')
+			metric.add_sample('flush_latency',value=response['_all']['primaries']['flush']['total']/response['_all']['primaries']['flush']['total_time_in_millis'],labels={})
+			yield metric
+		except ZeroDivisionError:
+			pass
+
 		#Garbage collection metrics 
-		'''response = json.loads(requests.get('http://localhost:9200/_nodes/_all/stats/jvm?pretty').content.decode('utf-8'))	
-		metric = Metric('gc_collectors_young_collection_count','Count of young-generation garbage collections','summary')
+		response = json.loads(requests.get('http://localhost:9200/_nodes/_local/stats/jvm?pretty').content.decode('utf-8'))	
+		
+		'''metric = Metric('gc_collectors_young_collection_count','Count of young-generation garbage collections','summary')
 		metric.add_sample('gc_collectors_young_collection_count',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['gc']['collectors']['young']['collection_count'],labels={})
 		yield metric
 
@@ -197,9 +223,15 @@ class CustomCollector(object):
 		metric.add_sample('jvm_mem_heap_committed_in_bytes',value=response['nodes']['o8oEi4i3TnGGhuUJXaUFxg']['jvm']['mem']['heap_committed_in_bytes'],labels={})
 		yield metric'''
 
+
 if __name__ == '__main__':
-	# pass port number as argument
-    start_http_server(1234)
+    # pass port number as argument
+
+    parser = argparse.ArgumentParser(description='Elasticsearch Metrics')
+    parser.add_argument('value',help="pass argument to start server",type=str)
+    args = parser.parse_args()
+
+    start_http_server(int(args.value))
     REGISTRY.register(CustomCollector())
     obj=CustomCollector()
     while True:
