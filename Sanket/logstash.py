@@ -1,8 +1,11 @@
 from prometheus_client import start_http_server, Metric, Summary,REGISTRY
+from pprint import pprint
 import sys
 import os
 import json
 import requests
+import time
+import argparse
 
 class CustomCollector(object):
 	def collect(self):
@@ -159,6 +162,30 @@ class CustomCollector(object):
 
 		#Metrics for pipeline stats
 		response = json.loads(requests.get('http://localhost:9600/_node/stats/pipeline').content.decode('utf-8'))
+		print type(response)
+	
+		with open("mylog.json", "r+") as f:
+			data=json.load(f)
+			print type(data)
+			print data
+		    
+			intemp=data['pipeline']['events']['in']
+			print intemp
+			
+			outtemp=data['pipeline']['events']['out']
+			print outtemp
+
+			data['pipeline']['events']['in']=response['pipeline']['events']['in']
+			data['pipeline']['events']['out']=response['pipeline']['events']['out']
+
+			f.seek(0)
+			json.dump(data,f)
+			f.truncate()
+			print data
+		
+		print 'in events per min '+ str(response['pipeline']['events']['in']-intemp)
+		print 'out events per min '+ str(response['pipeline']['events']['out']-outtemp)
+		
 		metric = Metric('pipeline_events_duration_in_millis','Total event duration in millis','summary')
 		metric.add_sample('pipeline_events_duration_in_millis',value=response['pipeline']['events']['duration_in_millis'],labels={})
 		yield metric
@@ -167,8 +194,16 @@ class CustomCollector(object):
 		metric.add_sample('pipeline_events_in',value=response['pipeline']['events']['in'],labels={})
 		yield metric
 
+		metric = Metric('pipeline_events_in_per_minute','Number of event in per minute','summary')
+		metric.add_sample('pipeline_events_in_per_minute',value=response['pipeline']['events']['in']-intemp,labels={})
+		yield metric
+
 		metric = Metric('pipeline_events_out','Number of event out','summary')
 		metric.add_sample('pipeline_events_out',value=response['pipeline']['events']['out'],labels={})
+		yield metric
+
+		metric = Metric('pipeline_events_out_per_minute','Number of event out per minute','summary')
+		metric.add_sample('pipeline_events_out_per_minute',value=response['pipeline']['events']['out']-outtemp,labels={})
 		yield metric
 
 		metric = Metric('pipeline_events_filtered','Number of event filtered','summary')
@@ -189,13 +224,16 @@ class CustomCollector(object):
 		metric.add_sample('pipeline_reloads_failures',value=response['pipeline']['reloads']['failures'],labels={})
 		yield metric
 
-
-
 if __name__ == '__main__':
-	# pass port number as argument
-    start_http_server(1235)
-    REGISTRY.register(CustomCollector())
-    obj=CustomCollector()
-    while True:
-    	obj.collect()
+		#pass port number as argument
+
+    	parser = argparse.ArgumentParser(description='Logstash Metrics')
+		parser.add_argument('value',help="pass argument to start server",type=str)
+		args = parser.parse_args()
+
+    	start_http_server(int(args.value))
+    	REGISTRY.register(CustomCollector())
+    	obj=CustomCollector()
+    	while True:
+    		obj.collect()
 
