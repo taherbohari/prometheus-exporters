@@ -16,24 +16,24 @@ host_ip = '127.0.0.1'
 es = elasticsearch.Elasticsearch(host=host_ip, port=elasticsearch_port)
 
 
-		
+
 class ElasticSearch1(object):
     def collect(self):
-	print 'hello' + str(service_port)
+        print 'hello' + str(service_port)
         ic = elasticsearch.client.IndicesClient(es)
         ic_stats = ic.stats()
-	docs_count = ic_stats['_all']['total']['docs']['count']
-	print docs_count
+        docs_count = ic_stats['_all']['total']['docs']['count']
+        print docs_count
 
-	docs_deleted = ic_stats['_all']['total']['docs']['deleted']
-	print docs_deleted	
-		
+        docs_deleted = ic_stats['_all']['total']['docs']['deleted']
+        print docs_deleted
+
         for metrics in v545.elasticsearch_metrices:
             metric = Metric('number_of_nodes','Number of nodes','summary')
             metric.add_sample(metrics['name'],value=float(metrics['command']),labels={})
             yield metric
 			#print metrics['name'],metrics['command']
-			
+
 
 if __name__ == '__main__':
     # pass port number as argument
@@ -46,7 +46,7 @@ if __name__ == '__main__':
     print args.service_port
     print args.exporter_port
 
-    service_port=args.service_port 
+    service_port=args.service_port
     exporter_port=args.exporter_port
 
     start_http_server(exporter_port)
