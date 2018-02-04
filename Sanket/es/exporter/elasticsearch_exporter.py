@@ -19,14 +19,14 @@ es = elasticsearch.Elasticsearch(host=host_ip, port=elasticsearch_port)
 		
 class ElasticSearch1(object):
     def collect(self):
-	print 'hello' + str(service_port)
-        ic = elasticsearch.client.IndicesClient(es)
-        ic_stats = ic.stats()
-	docs_count = ic_stats['_all']['total']['docs']['count']
-	print docs_count
+	   print 'hello' + str(service_port)
+       ic = elasticsearch.client.IndicesClient(es)
+       ic_stats = ic.stats()
+	   docs_count = ic_stats['_all']['total']['docs']['count']
+	   print docs_count
 
-	docs_deleted = ic_stats['_all']['total']['docs']['deleted']
-	print docs_deleted	
+	   docs_deleted = ic_stats['_all']['total']['docs']['deleted']
+	   print docs_deleted	
 		
         for metrics in v545.elasticsearch_metrices:
             metric = Metric('number_of_nodes','Number of nodes','summary')
