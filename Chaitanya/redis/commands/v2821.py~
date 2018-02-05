@@ -1,0 +1,55 @@
+#!/usr/bin/python
+
+redis_metrices = [
+
+     {
+	'name': 'connected_clients',
+    	'command': "redis-cli info | awk -F: '/connected_clients/{print $2}'",
+    	'desc': 'Total connected clients to redis server',
+    	'type': 'summary',
+		'data_type':'float'
+    },
+    {
+	'name': 'connected_slaves',
+     	'command':"redis-cli info | awk -F: '/connected_slaves/{print $2}'",
+    	'desc':'Total number of slaves connected to a master',
+    	'type':'summary',
+		'data_type':'float'
+    },
+    {
+	'name': 'blocked_clients',
+	'command':"redis-cli info | awk -F: '/blocked_clients/{print $2}'",
+	'desc':'Total number of blocked clients by redis server',
+	'type':'summary',
+	'data_type':'float'
+    },
+    {	'name':'mem_fragmentation_ratio',
+	'command':"redis-cli info | awk -F: '/mem_fragmentation_ratio/{print $2}'",
+	'desc':'Ratio of memory allocated by operating system to memory requested by redis',
+	'type':'summary',
+	'data_type':'float'
+    },
+
+    {	'name':'instantaneous_ops_per_sec',
+	'command':"redis-cli info | awk -F: '/instantaneous_ops_per_sec/{print $2}'",
+	'desc':'Number of commands processed per second',
+	'type':'summary',
+	'data_type':'float'
+    },
+
+    {	'name':'keyspace_misses',
+	'command':"redis-cli info | awk -F: '/keyspace_misses/{print $2}'",
+	'desc':'number of failed lookups of keys',
+	'type':'summary',
+	'data_type':'float'
+    },
+
+    {
+	'name':'used_memory',
+	'command':"redis-cli info | awk -F: '$1 ~ /used_memory$/{print $2}'",
+	'desc':'Amount of memory used by Redis',
+	'type':'summary',
+	'data_type':'integer'
+    }
+
+]
