@@ -1,0 +1,57 @@
+sanket@Sanket:~$ curl localhost:9019
+# HELP process_virtual_memory_bytes Virtual memory size in bytes.
+# TYPE process_virtual_memory_bytes gauge
+process_virtual_memory_bytes 208367616.0
+# HELP process_resident_memory_bytes Resident memory size in bytes.
+# TYPE process_resident_memory_bytes gauge
+process_resident_memory_bytes 15593472.0
+# HELP process_start_time_seconds Start time of the process since unix epoch in seconds.
+# TYPE process_start_time_seconds gauge
+process_start_time_seconds 1518022414.84
+# HELP process_cpu_seconds_total Total user and system CPU time spent in seconds.
+# TYPE process_cpu_seconds_total counter
+process_cpu_seconds_total 10.110000000000001
+# HELP process_open_fds Number of open file descriptors.
+# TYPE process_open_fds gauge
+process_open_fds 7.0
+# HELP process_max_fds Maximum number of open file descriptors.
+# TYPE process_max_fds gauge
+process_max_fds 1024.0
+# HELP supervisord_total_services Total number of services in supervisor
+# TYPE supervisord_total_services summary
+supervisord_total_services 2.0
+# HELP nodehook_running_status Running status of service
+# TYPE nodehook_running_status summary
+nodehook_running_status 1.0
+# HELP nodehook2_running_status Running status of service
+# TYPE nodehook2_running_status summary
+nodehook2_running_status 1.0
+# HELP supervisord_running_services Total number of running services
+# TYPE supervisord_running_services summary
+supervisord_running_services 2.0
+# HELP supervisord_stopped_services Total number of stopped services
+# TYPE supervisord_stopped_services summary
+supervisord_stopped_services 0.0
+# HELP elasticsearch_exists_status Service exists(1) or not(0)
+# TYPE elasticsearch_exists_status summary
+elasticsearch_exists_status 1.0
+# HELP elasticsearch_running_status Service running(1) or dead(0)
+# TYPE elasticsearch_running_status summary
+elasticsearch_running_status 0.0
+# HELP logstash_exists_status Service exists(1) or not(0)
+# TYPE logstash_exists_status summary
+logstash_exists_status 1.0
+# HELP logstash_running_status Service running(1) or dead(0)
+# TYPE logstash_running_status summary
+logstash_running_status 0.0
+# HELP redis_exists_status Service exists(1) or not(0)
+# TYPE redis_exists_status summary
+redis_exists_status 0.0
+# HELP redis_running_status Service running(1) or dead(0)
+# TYPE redis_running_status summary
+redis_running_status 0.0
+# HELP python_info Python platform information
+# TYPE python_info gauge
+python_info{implementation="CPython",major="2",minor="7",patchlevel="12",version="2.7.12"} 1.0
+sanket@Sanket:~$ 
+
