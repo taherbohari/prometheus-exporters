@@ -10,23 +10,26 @@ SERVICE_PORT = 2181
 
 class KafkaExporter(object):
     def collect(self):
-        for metrics in v100.kafka_metrices:
-            val = subprocess.check_output(metrics['command'], stderr = subprocess.STDOUT, shell = True)
-            if val != '' and val != None:
-                if metrics['name'] == 'number_of_partitions':
-                    val = val.split('\n')[0]
-                    arr = val.split('\t')
-                    val = arr[1].split(':')[1]
-                if metrics['name'] == 'number_of_replications':
-                    val = val.split('\n')[0]
-                    arr = val.split('\t')
-                    val = arr[2].split(':')[1]
-                metric = Metric(metrics['name'], metrics['desc'], metrics['type'])
-                if metrics['data_type'] == 'float':
-                    metric.add_sample(metrics['name'], value = float(val), labels = {})
-                if metrics['data_type'] == 'integer':
-                    metric.add_sample(metrics['name'], value = int(val), labels = {})
-                yield metric
+        try:
+            for metrics in v100.kafka_metrices:
+                val = subprocess.check_output(metrics['command'], stderr = subprocess.STDOUT, shell = True)
+                if val != '' and val != None:
+                    if metrics['name'] == 'number_of_partitions':
+                        val = val.split('\n')[0]
+                        arr = val.split('\t')
+                        val = arr[1].split(':')[1]
+                    if metrics['name'] == 'number_of_replications':
+                        val = val.split('\n')[0]
+                        arr = val.split('\t')
+                        val = arr[2].split(':')[1]
+                    metric = Metric(metrics['name'], metrics['desc'], metrics['type'])
+                    if metrics['data_type'] == 'float':
+                        metric.add_sample(metrics['name'], value = float(val), labels = {})
+                    if metrics['data_type'] == 'integer':
+                        metric.add_sample(metrics['name'], value = int(val), labels = {})
+                    yield metric
+        except Exception as err:
+            print err
 
 if __name__ == '__main__':
     try:
