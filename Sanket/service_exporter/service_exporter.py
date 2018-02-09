@@ -14,7 +14,6 @@ class SuperVisor(object):
         print 'Go to localhost:9019'
         SERVICE=self._endpoint
 
-############################## supervisor part ############################
         os_release=str(os.popen('lsb_release -r').readlines()[0].strip()[9:13])
         print type(os_release)
         print os_release
@@ -58,25 +57,25 @@ class SuperVisor(object):
             if SERVICE!='all':
                 l=len(SERVICE)
                 for i in range(0,l):
-                    loaded_status = (os.popen('service '+SERVICE[i]+' status').readlines()[1]).strip()[8:14]
-                    #print loaded_status
-                    if loaded_status=='loaded':
-                        lflag=1
-                    else:
-                        lflag=0
-                    metric = Metric(SERVICE[i]+'_exists_status', 'Service exists(1) or not(0)','summary')
-                    metric.add_sample(SERVICE[i]+'_exists_status', value=lflag, labels={})
-                    yield metric
+                loaded_status = (os.popen('service '+SERVICE[i]+' status').readlines()[1]).strip()[8:14]
+                #print loaded_status
+                if loaded_status=='loaded':
+                    lflag=1
+                else:
+                    lflag=0
+                metric = Metric(SERVICE[i]+'_exists_status', 'Service exists(1) or not(0)','summary')
+                metric.add_sample(SERVICE[i]+'_exists_status', value=lflag, labels={})
+                yield metric
 
-                    active_status = (os.popen('service '+SERVICE[i]+' status').readlines()[2]).strip()[8:24]
-                    #print active_status
-                    if active_status=='active (running)':
-                        rflag=1
-                    else:
-                        rflag=0
-                    metric = Metric(SERVICE[i]+'_running_status', 'Service running(1) or dead(0)','summary')
-                    metric.add_sample(SERVICE[i]+'_running_status', value=rflag, labels={})
-                    yield metric
+                active_status = (os.popen('service '+SERVICE[i]+' status').readlines()[2]).strip()[8:24]
+                #print active_status
+                if active_status=='active (running)':
+                    rflag=1
+                else:
+                    rflag=0
+                metric = Metric(SERVICE[i]+'_running_status', 'Service running(1) or dead(0)','summary')
+                metric.add_sample(SERVICE[i]+'_running_status', value=rflag, labels={})
+                yield metric
 
         if os_release=='16.04':
             n = int(os.popen('sudo supervisorctl status all | wc -l').readlines()[0])
@@ -95,7 +94,7 @@ class SuperVisor(object):
                     stopped = stopped+1
                 else :
                     flag=1
-                running = running+1
+                    running = running+1
                 #print  name + '_running_status '+ str(flag)
                 metric = Metric(name+'_running_status', 'Running status of service','summary')
                 metric.add_sample(name+'_running_status', value=flag, labels={})
@@ -110,8 +109,6 @@ class SuperVisor(object):
             metric = Metric('supervisord_stopped_services', 'Total number of stopped services','summary')
             metric.add_sample('supervisord_stopped_services', value=stopped, labels={})
             yield metric
-
-        ################################## system services part #############################
 
             if SERVICE!='all':
                 l=len(SERVICE)
