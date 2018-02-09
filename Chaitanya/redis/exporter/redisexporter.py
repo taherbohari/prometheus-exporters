@@ -3,7 +3,6 @@
 from prometheus_client import start_http_server, Metric, Summary,REGISTRY
 import subprocess
 import sys
-import redis
 import os
 import argparse
 from redis.commands import v2821
