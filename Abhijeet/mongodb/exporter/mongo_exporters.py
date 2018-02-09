@@ -23,7 +23,7 @@ class MongodbExporter(object):
 		db = client.dbname
 		result2 = db.command("dbstats")
 		result1 = db.command("serverStatus")
-	
+
 		try:
 			for metrics in ver3.mongodb1:
 				temp = result1
@@ -63,13 +63,13 @@ if __name__ == '__main__':
 		print args.service_port
 		print args.exporter_port
 		print args.db_name
-	
+
 		SERVICE_PORT = args.service_port
 		EXPORTER_PORT = args.exporter_port
 		DB_NAME=args.db_name
 
 		start_http_server(EXPORTER_PORT)
-		
+
 		REGISTRY.register(MongodbExporter(DB_NAME))
 		obj = MongodbExporter(DB_NAME)
 		while True:
