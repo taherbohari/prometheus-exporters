@@ -28,7 +28,7 @@ class PostfixExporter(object):
            
 if __name__ == '__main__':
     try:
-        parser = argparse.ArgumentParser(description = 'Redis Exporter Arguments')
+        parser = argparse.ArgumentParser(description = 'Postfix Exporter Arguments')
         parser.add_argument('-s','--service-port', type = int, default = SERVICE_PORT)
         parser.add_argument('-e','--exporter-port', type = int, default = EXPORTER_PORT)
         args = parser.parse_args()

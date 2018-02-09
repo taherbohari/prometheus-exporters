@@ -33,7 +33,7 @@ postfix_metrices=[
     'command': "pqshell --summary |awk '/Total queue size/ {print $4}'",
     'desc': 'Size of the mail queue',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     }
 
 ]

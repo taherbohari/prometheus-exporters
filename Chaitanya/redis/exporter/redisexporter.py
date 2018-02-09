@@ -26,6 +26,9 @@ class RedisExporter(object):
                     yield metric
             kh=int(dict_metrices['keyspace_hits'])                           
             km=int(dict_metrices['keyspace_misses'])
+            for metrics in v2821.redis_metrices:
+                if metrics['name'] not in dict_metrices:
+                    print metrics['name']+' is not available'
             try:                       
                 val=kh/(kh+km)
             except ZeroDivisionError:
