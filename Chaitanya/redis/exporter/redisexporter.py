@@ -13,28 +13,43 @@ EXPORTER_PORT = 9004
 
 class RedisExporter(object):
     def collect(self):
-        print 'Go to http://localhost/'
-        for metrics in v2821.redis_metrices:
-            val = subprocess.check_output(metrics['command'],stderr=subprocess.STDOUT,shell=True)
-            if val!='':
-                metric = Metric(metrics['name'],metrics['desc'],'summary')
-                if metrics['data_type'] == 'float':
-                    metric.add_sample(metrics['name'],value=float(val.strip()),labels={})
-                if metrics['data_type'] == 'integer':
-                    metric.add_sample(metrics['name'],value=int(val.strip()),labels={})
-                yield metric
+        dict_metrices={}
+        try:
+            for metrics in v2821.redis_metrices:
+                val = subprocess.check_output(metrics['command'], stderr = subprocess.STDOUT, shell = True)
+                dict_metrices.update({metrics['name']: val.strip()})
+                if  val != '' and  val != None :
+                    metric = Metric(metrics['name'], metrics['desc'], metrics['type'])
+                    if metrics['data_type'] == 'float':
+                        metric.add_sample(metrics['name'], value = float(val.strip()), labels = {})
+                    if metrics['data_type'] == 'integer':
+                        metric.add_sample(metrics['name'], value = int(val.strip()), labels = {})
+                    yield metric
+            kh=int(dict_metrices['keyspace_hits'])                           
+            km=int(dict_metrices['keyspace_misses'])
+            try:                       
+                val=kh/(kh+km)
+            except ZeroDivisionError:
+                val=0
+            metric = Metric('hit_rate', 'Cache hit rate', 'summary')
+            metric.add_sample('hit_rate', value = float(val), labels = {})
+            yield metric
+        except Exception as err:
+            print err
 
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description='Redis Exporter Arguments')
-    parser.add_argument('-s','--service-port', type=int, default=SERVICE_PORT)
-    parser.add_argument('-e','--exporter-port', type=int, default=EXPORTER_PORT)
-    args=parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description = 'Redis Exporter Arguments')
+        parser.add_argument('-s','--service-port', type = int, default = SERVICE_PORT)
+        parser.add_argument('-e','--exporter-port', type = int, default = EXPORTER_PORT)
+        args = parser.parse_args()
 
-    SERVICE_PORT = args.service_port
-    EXPORTER_PORT = args.exporter_port
-    start_http_server(EXPORTER_PORT)
-    REGISTRY.register(RedisExporter())
-    obj = RedisExporter()
-    while True:
-        obj.collect()
-
+        SERVICE_PORT = args.service_port
+        EXPORTER_PORT = args.exporter_port
+        start_http_server(EXPORTER_PORT)
+        REGISTRY.register(RedisExporter())
+        obj = RedisExporter()
+        while True:
+            obj.collect()
+    except Exception as err:
+        print err
