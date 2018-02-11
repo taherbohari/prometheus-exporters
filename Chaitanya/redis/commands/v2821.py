@@ -7,21 +7,21 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '/connected_clients/{print $2}'",
     'desc': 'Total connected clients to redis server',
     'type': 'summary',
-	'data_type': 'float'
+	'data_type': 'integer'
     },
     {
 	'name': 'connected_slaves',
     'command': "redis-cli info | awk -F: '/connected_slaves/{print $2}'",
     'desc': 'Total number of slaves connected to a master',
     'type': 'summary',
-	'data_type': 'float'
+	'data_type': 'integer'
     },
     {
 	'name': 'blocked_clients',
 	'command': "redis-cli info | awk -F: '/blocked_clients/{print $2}'",
 	'desc': 'Total number of blocked clients by redis server',
 	'type': 'summary',
-	'data_type': 'float'
+	'data_type': 'integer'
     },
     {	
     'name': 'mem_fragmentation_ratio',
@@ -36,7 +36,7 @@ redis_metrices = [
 	'command': "redis-cli info | awk -F: '/instantaneous_ops_per_sec/{print $2}'",
 	'desc': 'Number of commands processed per second',
 	'type': 'summary',
-	'data_type': 'float'
+	'data_type': 'integer'
     },
 
     {
@@ -44,7 +44,7 @@ redis_metrices = [
 	'command': "redis-cli info | awk -F: '/keyspace_misses/{print $2}'",
 	'desc': 'number of failed lookups of keys',
 	'type': 'summary',
-	'data_type': 'float'
+	'data_type': 'integer'
     },
 
     {
@@ -68,7 +68,7 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '$1 ~ /rdb_changes_since_last_save$/{print $2}'",
     'desc': 'Number of changes to database since last dump',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
 
     {
@@ -76,21 +76,21 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '$1 ~ /rejected_connections$/{print $2}'",
     'desc': 'Number of connections rejected due to hitting maxclient limit',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'evicted_keys',
     'command': "redis-cli info | awk -F: '$1 ~ /evicted_keys$/{print $2}'",
     'desc': 'Number Of keys removed due to reaching maxmemory limit',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'keyspace_hits',
     'command': "redis-cli info | awk -F: '$1 ~ /keyspace_hits$/{print $2}'",
     'desc': 'Number Of keys in database',
     'type': 'summary',
-    'data_type': 'float',
+    'data_type': 'integer',
     },
     {
     'name': 'master_link_down_since_seconds',
@@ -139,14 +139,14 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '$1 ~ /client_longest_output_list$/{print $2}'",
     'desc': 'Longest output lists among current client connections',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'client_biggest_input_buf',
     'command': "redis-cli info | awk -F: '$1 ~ /client_biggest_input_buf$/{print $2}'",
     'desc': 'Biggest input buffers aong current client connections',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'used_memory_rss',
@@ -167,13 +167,6 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '$1 ~ /rdb_bgsave_in_progress$/{print $2}'",
     'desc': 'Flag indiacting a rdb save is going on',
     'type': 'summary',
-    'data_type': 'float'
-    },
-    {
-    'name': 'rdb_last_save_time',
-    'command': "redis-cli info | awk -F: '$1 ~ /rdb_bgsave_in_progress$/{print $2}'",
-    'desc': 'Timestamp of last successful RDB save',
-    'type': 'summary',
     'data_type': 'integer'
     },
     {
@@ -181,42 +174,42 @@ redis_metrices = [
     'command': "redis-cli info | awk -F: '$1 ~ /aof_enabled$/{print $2}'",
     'desc': 'Flag indicating AOF logging is activated',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'aof_rewrite_in_progress',
     'command': "redis-cli info | awk -F: '$1 ~ /aof_rewrite_in_progress$/{print $2}'",
     'desc': 'Flag indicating an aof rewrite is going on',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'aof_rewrite_scheduled',
     'command': "redis-cli info | awk -F: '$1 ~ /aof_rewrite_scheduled$/{print $2}'",
     'desc': 'Flag indicating AOF rewrite operation is going to be scheduled',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'total_connections_received',
     'command': "redis-cli info | awk -F: '$1 ~ /total_connections_received$/{print $2}'",
     'desc': 'Total number of connections accepted by redis server',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'total_commands_processed',
     'command': "redis-cli info | awk -F: '$1 ~ /total_commands_processed$/{print $2}'",
     'desc': 'Total number of commands processed by the server',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'expired_keys',
     'command': "redis-cli info | awk -F: '$1 ~ /expired_keys$/{print $2}'",
     'desc': 'Total number of key expiration events',
     'type': 'summary',
-    'data_type': 'float'
+    'data_type': 'integer'
     },
     {
     'name': 'latest_fork_usec',

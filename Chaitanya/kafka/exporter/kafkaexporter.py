@@ -5,7 +5,7 @@ import sys
 import os
 import argparse
 from kafka.commands import v100
-EXPORTER_PORT = 9007
+EXPORTER_PORT = 9006
 SERVICE_PORT = 2181
 
 class KafkaExporter(object):
