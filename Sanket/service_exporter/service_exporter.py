@@ -2,6 +2,7 @@
 from prometheus_client import start_http_server, Metric, Summary, REGISTRY
 import sys, os
 import argparse
+import commands
 
 '''
 ubuntu 14.04
@@ -66,8 +67,8 @@ class SuperVisor(object):
             if SERVICE!='all':
                 l=len(SERVICE)
                 for i in range(0,l):
-                    loaded_status = (os.popen('service '+SERVICE[i]+' status').readlines()[0]).strip()[0:25]
-                    #print loaded_status
+                    loaded_status = (os.popen('service '+SERVICE[i]+' status | awk "/Active:/{print $2}" ').readlines())
+                    print loaded_status
                     if loaded_status=='loaded':
                         lflag=1
                     else:
@@ -130,8 +131,9 @@ class SuperVisor(object):
             if SERVICE!='all':
                 l=len(SERVICE)
                 for i in range(0,l):
-                    loaded_status = (os.popen('service '+SERVICE[i]+' status').readlines()[1]).strip()[8:14]
-                    #print loaded_status
+                    #loaded_status = str(os.popen('service '+SERVICE[i]+' status').readlines()).strip()
+                    status, loaded_status = commands.getstatusoutput("service "+SERVICE[i]+" status | awk '/Loaded:/{print $2}'")
+                    print loaded_status
                     if loaded_status=='loaded':
                         lflag=1
                     else:
@@ -140,8 +142,8 @@ class SuperVisor(object):
                     metric.add_sample(SERVICE[i]+'_exists_status', value=lflag, labels={})
                     yield metric
 
-                    active_status = (os.popen('service '+SERVICE[i]+' status').readlines()[2]).strip()[8:24]
-                    #print active_status
+                    status, active_status = commands.getstatusoutput("service "+SERVICE[i]+" status | awk '/Active:/{print $2"+'" "'+"$3}'")
+                    print active_status
                     if active_status=='active (running)':
                         rflag=1
                     else:
