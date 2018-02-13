@@ -29,8 +29,9 @@ class SuperVisor(object):
         
         if os_release=='14.04':
             supervisor_status = (os.popen('sudo service supervisor status').readlines()[0]).strip()[0:11] 
+            print supervisor_status
             if supervisor_status=='is running': 
-                n = int(os.popen('sudo supervisorctl status all | wc -l').readlines()[0])
+                n = int(os.popen('sudo supervisorctl status | wc -l').readlines()[0])
 
                 metric = Metric('supervisord_total_services', 'Total number of services in supervisor','summary')
                 metric.add_sample('supervisord_total_services', value=n, labels={})
@@ -41,7 +42,8 @@ class SuperVisor(object):
                 running = 0
 
                 for i in range(0,n):
-                    name,status = map(str, os.popen('sudo supervisorctl status all').readlines()[i].split()[0:2])
+                    name,status = map(str, os.popen('sudo supervisorctl status').readlines()[i].split()[0:2])
+                    print name+status
                     if status == 'STOPPED':
                         stopped = stopped+1
                     else :
@@ -67,7 +69,7 @@ class SuperVisor(object):
             if SERVICE!='all':
                 l=len(SERVICE)
                 for i in range(0,l):
-                    loaded_status = (os.popen('service '+SERVICE[i]+' status | awk "/Active:/{print $2}" ').readlines())
+                    status, loaded_status = commands.getstatusoutput("sudo service "+SERVICE[i]+" status | awk '{print $3 $4 $5}'")
                     print loaded_status
                     if loaded_status=='loaded':
                         lflag=1
@@ -77,9 +79,8 @@ class SuperVisor(object):
                     metric.add_sample(SERVICE[i]+'_exists_status', value=lflag, labels={})
                     yield metric
 
-                    active_status = (os.popen('service '+SERVICE[i]+' status').readlines()[2]).strip()[8:24]
                     #print active_status
-                    if active_status=='active (running)':
+                    if loaded_status=='is running':
                         rflag=1
                     else:
                         rflag=0
@@ -105,7 +106,7 @@ class SuperVisor(object):
                 running = 0
 
                 for i in range(0,n):
-                    name,status = map(str, os.popen('sudo supervisorctl status all').readlines()[i].split()[0:2])
+                    name,status = map(str, os.popen('sudo supervisorctl status').readlines()[i].split()[0:2])
                     if status == 'STOPPED':
                         stopped = stopped+1
                     else :
@@ -132,7 +133,7 @@ class SuperVisor(object):
                 l=len(SERVICE)
                 for i in range(0,l):
                     #loaded_status = str(os.popen('service '+SERVICE[i]+' status').readlines()).strip()
-                    status, loaded_status = commands.getstatusoutput("service "+SERVICE[i]+" status | awk '/Loaded:/{print $2}'")
+                    status, loaded_status = commands.getstatusoutput("sudo service "+SERVICE[i]+" status | awk '/Loaded:/{print $2}'")
                     print loaded_status
                     if loaded_status=='loaded':
                         lflag=1
@@ -142,7 +143,7 @@ class SuperVisor(object):
                     metric.add_sample(SERVICE[i]+'_exists_status', value=lflag, labels={})
                     yield metric
 
-                    status, active_status = commands.getstatusoutput("service "+SERVICE[i]+" status | awk '/Active:/{print $2"+'" "'+"$3}'")
+                    status, active_status = commands.getstatusoutput("sudo service "+SERVICE[i]+" status | awk '/Active:/{print $2"+'" "'+"$3}'")
                     print active_status
                     if active_status=='active (running)':
                         rflag=1
