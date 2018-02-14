@@ -2,6 +2,7 @@
 from prometheus_client import start_http_server, Metric, Summary,REGISTRY
 import subprocess
 import sys
+import commands
 import os
 import argparse
 from postfix.commands import v2113
@@ -13,7 +14,7 @@ class PostfixExporter(object):
     def collect(self):
         try:
             for metrics in v2113.postfix_metrices:
-                val = subprocess.check_output(metrics['command'], stderr = subprocess.STDOUT, shell = True)
+                status,val=commands.getstatusoutput(metrics['command'])
                 if val!='' and val!=None:
                     metric = Metric(metrics['name'], metrics['desc'], metrics['type'])
                     if metrics['data_type'] == 'float':
