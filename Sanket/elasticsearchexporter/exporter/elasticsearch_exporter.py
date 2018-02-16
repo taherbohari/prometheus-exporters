@@ -14,8 +14,6 @@ EXPORTER_PORT = 9010
 HOST_IP = '127.0.0.1'
 ELASTICSEARCH_PORT = 9200
 
-esObject = elasticsearch.Elasticsearch(host=HOST_IP, port=ELASTICSEARCH_PORT)
-
 class ElasticSearch(object):
 
     def collect(self):
@@ -106,11 +104,13 @@ if __name__ == '__main__':
     try:
         parser = argparse.ArgumentParser(description='Elasticsearch port arguments')
         parser.add_argument('-i', '--host-ip', type=str, default = HOST_IP)
-        parser.add_argument('-e', '--elasticsearch-port', type=int, default = ELASTICSEARCH_PORT)
+        parser.add_argument('-e', '--elasticsearch-port',type=int, default = ELASTICSEARCH_PORT)
         args = parser.parse_args()
 
         HOST_IP = args.host_ip 
         ELASTICSEARCH_PORT = args.elasticsearch_port
+
+        esObject = elasticsearch.Elasticsearch(host=HOST_IP, port=ELASTICSEARCH_PORT)
 
         start_http_server(EXPORTER_PORT)
         REGISTRY.register(ElasticSearch())
