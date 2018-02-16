@@ -8,17 +8,19 @@ import argparse
 from logstashexporter.commands import v545
 from pprint import pprint 
 
-LOGSTASH_PORT = 9600
 EXPORTER_PORT = 9011
+
+HOST_IP= '127.0.0.1' 
+LOGSTASH_PORT = 9600
 
 class LogStash(object):
     def collect(self):
         ''' collect logstash metrices '''
-        print 'Go to localhost:9011'
+        print 'Go to '+HOST_IP+':'+str(EXPORTER_PORT)
         
         #Metric for jvm stats
     	try:
-            jvm_stat = json.loads(requests.get('http://localhost:9600/_node/stats/jvm').content.decode('utf-8'))
+            jvm_stat = json.loads(requests.get('http://'+HOST_IP+':'+str(LOGSTASH_PORT)+'/_node/stats/jvm').content.decode('utf-8'))
 
             for metrics in v545.jvm_metrices:                             
                  metric=Metric(metrics['name'],metrics['description'],metrics['type'])
@@ -34,7 +36,7 @@ class LogStash(object):
              
         #Metric for process stats
     	try:
-            process_stat = json.loads(requests.get('http://localhost:9600/_node/stats/process').content.decode('utf-8'))
+            process_stat = json.loads(requests.get('http://'+HOST_IP+':'+str(LOGSTASH_PORT)+'/_node/stats/process').content.decode('utf-8'))
 
             for metrics in v545.process_metrices:                             
                  metric=Metric(metrics['name'],metrics['description'],metrics['type'])
@@ -50,7 +52,7 @@ class LogStash(object):
 
         #Metric for pipeline stats
         try:
-            pipeline_stat = json.loads(requests.get('http://localhost:9600/_node/stats/pipeline').content.decode('utf-8'))
+            pipeline_stat = json.loads(requests.get('http://'+HOST_IP+':'+str(LOGSTASH_PORT)+'/_node/stats/pipeline').content.decode('utf-8'))
 
             for metrics in v545.pipeline_metrices:                             
                  metric=Metric(metrics['name'],metrics['description'],metrics['type'])
@@ -66,17 +68,19 @@ class LogStash(object):
               
 if __name__ == '__main__':
     # main
-    parser = argparse.ArgumentParser(description='Logstash port arguments')
-    parser.add_argument('-s', '--service-port', type=int, default = LOGSTASH_PORT)
-    parser.add_argument('-e', '--exporter-port', type=int, default = EXPORTER_PORT)
-    args = parser.parse_args()
+    try:
+        parser = argparse.ArgumentParser(description='Logstash port arguments')
+        parser.add_argument('-i', '--host-ip', type=str, default = HOST_IP)
+        parser.add_argument('-p', '--logstash-port', type=int, default = LOGSTASH_PORT)
+        args = parser.parse_args()
 
-    LOGSTASH_PORT = args.service_port 
-    EXPORTER_PORT = args.exporter_port
+        HOST_IP = args.host_ip 
+        LOGSTASH_PORT = args.logstash_port
 
-    start_http_server(EXPORTER_PORT)
-    REGISTRY.register(LogStash())
-    obj=LogStash()
-    while True:
-        obj.collect()
-
+        start_http_server(EXPORTER_PORT)
+        REGISTRY.register(LogStash())
+        obj=LogStash()
+        while True:
+            obj.collect()
+    except Exception as err:
+        print err
