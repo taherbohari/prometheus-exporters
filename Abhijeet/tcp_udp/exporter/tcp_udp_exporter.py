@@ -12,7 +12,7 @@ class Tcp_UdpExporter(object):
 	def collect(self):
 		try:
 			for metrics in tcp_commands.tcp_udp_metrics:
-				metric = Metric(metrics['name'], metrics['description'], 'summary')
+				metric = Metric(metrics['name'], metrics['description'], metrics['type'])
 				metric.add_sample(metrics['name'], value = float(subprocess.check_output(metrics['command'],stderr = subprocess.STDOUT, shell = True)), labels = {})
 				yield metric
 		except Exception as err:
