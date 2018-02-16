@@ -18,7 +18,7 @@ class ElasticSearch(object):
 
     def collect(self):
         ''' collect elasticsearch metrices '''
-        print 'Go to localhost:9010'
+        print 'Go to '+HOST_IP+':'+str(EXPORTER_PORT)
         #Get Cluster health metrices
         try:
             cc = elasticsearch.client.ClusterClient(esObject)
