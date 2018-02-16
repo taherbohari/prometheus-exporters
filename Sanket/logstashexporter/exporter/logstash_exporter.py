@@ -17,44 +17,52 @@ class LogStash(object):
         print 'Go to localhost:9011'
         
         #Metric for jvm stats
-    	jvm_stat = json.loads(requests.get('http://localhost:9600/_node/stats/jvm').content.decode('utf-8'))
+    	try:
+            jvm_stat = json.loads(requests.get('http://localhost:9600/_node/stats/jvm').content.decode('utf-8'))
 
-        for metrics in v545.jvm_metrices:                             
-             metric=Metric(metrics['name'],metrics['description'],metrics['type'])
-             temp = jvm_stat
-             param = metrics['param']   
-             for index in range(len(metrics['param'])):
-                 temp = temp[param[index]]
-                
-             metric.add_sample(metrics['name'],value=temp,labels={})
-             yield metric
-        
+            for metrics in v545.jvm_metrices:                             
+                 metric=Metric(metrics['name'],metrics['description'],metrics['type'])
+                 temp = jvm_stat
+                 param = metrics['param']   
+                 for index in range(len(metrics['param'])):
+                     temp = temp[param[index]]
+                    
+                 metric.add_sample(metrics['name'],value=temp,labels={})
+                 yield metric
+        except Exception as err:
+            print err
+             
         #Metric for process stats
-    	process_stat = json.loads(requests.get('http://localhost:9600/_node/stats/process').content.decode('utf-8'))
+    	try:
+            process_stat = json.loads(requests.get('http://localhost:9600/_node/stats/process').content.decode('utf-8'))
 
-        for metrics in v545.process_metrices:                             
-             metric=Metric(metrics['name'],metrics['description'],metrics['type'])
-             temp = process_stat
-             param = metrics['param']   
-             for index in range(len(metrics['param'])):
-                 temp = temp[param[index]]
-                
-             metric.add_sample(metrics['name'],value=temp,labels={})
-             yield metric
+            for metrics in v545.process_metrices:                             
+                 metric=Metric(metrics['name'],metrics['description'],metrics['type'])
+                 temp = process_stat
+                 param = metrics['param']   
+                 for index in range(len(metrics['param'])):
+                     temp = temp[param[index]]
+                    
+                 metric.add_sample(metrics['name'],value=temp,labels={})
+                 yield metric
+        except Exception as err:
+            print err
 
         #Metric for pipeline stats
-        pipeline_stat = json.loads(requests.get('http://localhost:9600/_node/stats/pipeline').content.decode('utf-8'))
+        try:
+            pipeline_stat = json.loads(requests.get('http://localhost:9600/_node/stats/pipeline').content.decode('utf-8'))
 
-        for metrics in v545.pipeline_metrices:                             
-             metric=Metric(metrics['name'],metrics['description'],metrics['type'])
-             temp = pipeline_stat
-             param = metrics['param']   
-             for index in range(len(metrics['param'])):
-                 temp = temp[param[index]]
-                
-             metric.add_sample(metrics['name'],value=temp,labels={})
-             yield metric
-
+            for metrics in v545.pipeline_metrices:                             
+                 metric=Metric(metrics['name'],metrics['description'],metrics['type'])
+                 temp = pipeline_stat
+                 param = metrics['param']   
+                 for index in range(len(metrics['param'])):
+                     temp = temp[param[index]]
+                    
+                 metric.add_sample(metrics['name'],value=temp,labels={})
+                 yield metric
+        except Exception as err:
+            print err
               
 if __name__ == '__main__':
     # main
