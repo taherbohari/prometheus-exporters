@@ -33,7 +33,7 @@ class SuperVisor(object):
             if supervisor_status=='is running': 
                 n = int(os.popen('sudo supervisorctl status | wc -l').readlines()[0])
 
-                metric = Metric('supervisord_total_services', 'Total number of services in supervisor','summary')
+                metric = Metric('supervisord_total_services', 'Total number of services in supervisor','counter')
                 metric.add_sample('supervisord_total_services', value=n, labels={})
                 yield metric
 
