@@ -25,14 +25,18 @@ class ElasticSearch(object):
             cc_health = cc.health()
             #pprint(cc_health) 
             for metrics in v545.cluster_health_metrices:                             
-                 metric = Metric(metrics['name'],metrics['description'],metrics['type'])
                  temp = cc_health
+                 flag = 1
                  param = metrics['param']   
                  for index in range(len(metrics['param'])):
+                     if param[index] not in temp:
+                         flag = 0
+                         break
                      temp = temp[param[index]]
-                    
-                 metric.add_sample(metrics['name'],value=temp,labels={})
-                 yield metric
+                 if flag == 1:
+                     metric = Metric(metrics['name'],metrics['description'],metrics['type'])  
+                     metric.add_sample(metrics['name'],value=temp,labels={})
+                     yield metric
         except Exception as err:
             print err
 
@@ -40,16 +44,20 @@ class ElasticSearch(object):
         try:
             cc = elasticsearch.client.ClusterClient(esObject)
             cc_stats = cc.stats()
-            #pprint(cc_stats) 
+            #pprint(cc_stats)
             for metrics in v545.cluster_stats_metrices:                             
-                 metric = Metric(metrics['name'],metrics['description'],metrics['type'])
                  temp = cc_stats
+                 flag = 1
                  param = metrics['param']   
                  for index in range(len(metrics['param'])):
+                     if param[index] not in temp:
+                         flag = 0
+                         break
                      temp = temp[param[index]]
-                    
-                 metric.add_sample(metrics['name'],value=temp,labels={})
-                 yield metric
+                 if flag == 1:
+                    metric = Metric(metrics['name'],metrics['description'],metrics['type'])
+                    metric.add_sample(metrics['name'],value=temp,labels={})
+                    yield metric
         except Exception as err:
             print err
 
@@ -57,15 +65,21 @@ class ElasticSearch(object):
         try:
             ic = elasticsearch.client.IndicesClient(esObject)                             
             ic_stats = ic.stats()
+            #pprint(ic_stats)
             for metrics in v545.index_stats_metrices:                             
-                 metric=Metric(metrics['name'],metrics['description'],metrics['type'])
                  temp = ic_stats
+                 flag = 1
                  param = metrics['param']   
                  for index in range(len(metrics['param'])):
+                     if param[index] not in temp:
+                         flag = 0
+                         break
                      temp = temp[param[index]]
-                    
-                 metric.add_sample(metrics['name'],value=temp,labels={})
-                 yield metric
+                 if flag ==1:
+                     print temp
+                     metric=Metric(metrics['name'],metrics['description'],metrics['type'])   
+                     metric.add_sample(metrics['name'],value=temp,labels={})
+                     yield metric
         except Exception as err:
             print err
          
@@ -76,14 +90,18 @@ class ElasticSearch(object):
             for nodeID, node_stats in nc_stats['nodes'].iteritems():
                 #pprint(node_stats)
                 for metrics in v545.node_stats_metrices:                             
-                    metric = Metric(metrics['name'],metrics['description'],metrics['type'])
                     temp = node_stats
+                    flag = 1
                     param = metrics['param']   
                     for index in range(len(metrics['param'])):
+                        if param[index] not in temp:
+                            flag = 0
+                            break
                         temp = temp[param[index]]
-                    
-                    metric.add_sample(metrics['name'],value=temp,labels={})
-                    yield metric
+                    if flag == 1:
+                        metric = Metric(metrics['name'],metrics['description'],metrics['type'])
+                        metric.add_sample(metrics['name'],value=temp,labels={})
+                        yield metric
         except Exception as err:
             print err
              
@@ -91,7 +109,7 @@ class ElasticSearch(object):
         try:
             cat = elasticsearch.client.CatClient(esObject)
             cat_stats = cat.allocation()
-            #pprint(cat_stats)
+            pprint(cat_stats)
             for metrics in v545.cat_metrices:                             
                  metric = Metric(metrics['name'],metrics['description'],metrics['type'])
                  metric.add_sample(metrics['name'],value=float(cat_stats.split(" ")[metrics['param']].rstrip('gb')),labels={})
