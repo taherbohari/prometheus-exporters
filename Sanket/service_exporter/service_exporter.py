@@ -30,7 +30,6 @@ class SuperVisor(object):
         if os_release=='14.04':
             ######### Supervisord Services ##########
             supervisor_status = (os.popen('sudo service supervisor status').readlines()[0]).strip()[0:11] 
-            print supervisor_status
             if supervisor_status=='is running': 
                 n = int(os.popen('sudo supervisorctl status | wc -l').readlines()[0])
                 
@@ -44,7 +43,6 @@ class SuperVisor(object):
                 
                 for i in range(0,n):
                     name,status = map(str, os.popen('sudo supervisorctl status').readlines()[i].split()[0:2])
-                    print name+status
                     if status == 'STOPPED':
                         stopped = stopped+1
                     else :
@@ -69,8 +67,11 @@ class SuperVisor(object):
             if SERVICE!='all':
                 l=len(SERVICE)
                 for i in range(0,l):
-                    status, loaded_status = commands.getstatusoutput("sudo service "+SERVICE[i]+" status | awk '{print $3 $4 $5}'")
+                    status, loaded_status = commands.getstatusoutput("sudo service "+SERVICE[i]+" status")
+                    status, loaded_awk = commands.getstatusoutput("echo '"+loaded_status+"' | awk '{print $3 "' '" $4}'")
+
                     print loaded_status
+                    print loaded_awk
                     if loaded_status=='loaded':
                         lflag=1
                     else:
