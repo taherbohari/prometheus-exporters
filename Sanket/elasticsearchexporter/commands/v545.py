@@ -471,12 +471,12 @@ node_stats_metrices=[
         "description": "Max heap memory in bytes",
         "type": "gauge"
     },
-    {
-        "name": "jvm_mem_heap_used_in_bytes",
-        "param": ['jvm', 'mem', 'heap_used_in_bytes'],
-        "description": "Used heap memory in bytes",
-        "type": "gauge"
-    },
+#    {
+#       "name": "jvm_mem_heap_used_in_bytes",
+#        "param": ['jvm', 'mem', 'heap_used_in_bytes'],
+#        "description": "Used heap memory in bytes",
+#        "type": "gauge"
+#    },
     {
         "name": "jvm_mem_heap_used_percent",
         "param": ['jvm', 'mem', 'heap_used_percent'],
