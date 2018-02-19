@@ -11,7 +11,7 @@ from pprint import pprint
 
 EXPORTER_PORT = 9010
 
-HOST_IP = '127.0.0.1'
+HOST_IP = '13.127.191.55'
 ELASTICSEARCH_PORT = 9200
 
 class ElasticSearch(object):
@@ -109,7 +109,7 @@ class ElasticSearch(object):
         try:
             cat = elasticsearch.client.CatClient(esObject)
             cat_stats = cat.allocation()
-            pprint(cat_stats)
+            #pprint(cat_stats)
             for metrics in v545.cat_metrices:                             
                  metric = Metric(metrics['name'],metrics['description'],metrics['type'])
                  metric.add_sample(metrics['name'],value=float(cat_stats.split(" ")[metrics['param']].rstrip('gb')),labels={})
