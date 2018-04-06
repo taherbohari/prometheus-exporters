@@ -2,6 +2,7 @@
 
 from prometheus_client import start_http_server, Metric, Summary,REGISTRY
 import subprocess
+import commands
 import sys
 import os
 import argparse
@@ -15,7 +16,7 @@ class RedisExporter(object):
         dict_metrices={}
         try:
             for metrics in v2821.redis_metrices:
-                val = subprocess.check_output(metrics['command'], stderr = subprocess.STDOUT, shell = True)
+                status, val = commands.getstatusoutput(metrics['command'])
                 dict_metrices.update({metrics['name']: val.strip()})
                 if  val != '' and  val != None :
                     metric = Metric(metrics['name'], metrics['desc'], metrics['type'])
