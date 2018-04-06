@@ -30,7 +30,7 @@ class MongodbExporter(object):
 				param = metrics['param']
 				for index in range(len(metrics['param'])):
 					temp = temp[param[index]]
-				metric = Metric(metrics['name'], metrics['description'], 'summary')
+				metric = Metric(metrics['name'], metrics['description'], metrics['type'])
 				if metrics['datatype'] == 'float':
 					metric.add_sample(metrics['name'], value = float(temp), labels = {})
 				if metrics['datatype'] == 'int':
@@ -42,7 +42,7 @@ class MongodbExporter(object):
 				param = metrics['param']
 				for index in range(len(metrics['param'])):
 					temp = temp[param[index]]
-				metric = Metric(metrics['name'], metrics['description'], 'summary')
+				metric = Metric(metrics['name'], metrics['description'], metrics['type'])
 				if metrics['datatype'] == 'float':
 					metric.add_sample(metrics['name'], value = float(temp), labels = {})
 				if metrics['datatype'] == 'int':
