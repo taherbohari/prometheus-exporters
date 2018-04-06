@@ -42,6 +42,7 @@ class SuperVisor(object):
                 running = 0
                 
                 for i in range(0,n):
+                    flag = 0
                     name,status = map(str, os.popen('sudo supervisorctl status').readlines()[i].split()[0:2])
                     if status == 'STOPPED':
                         stopped = stopped+1
@@ -49,8 +50,8 @@ class SuperVisor(object):
                         flag=1
                         running = running+1
                     #print  name + '_running_status '+ str(flag)
-                    metric = Metric(name+'_running_status', 'Running status of service','gauge')
-                    metric.add_sample(name+'_running_status', value=flag, labels={})
+                    metric = Metric('child_running_status_'+name, 'Running status of service','gauge')
+                    metric.add_sample('child_running_status', value=flag, labels={'supervisord_service': name})
                     yield metric
                     
                 #print "total_running_services: " + str(r)
@@ -103,6 +104,7 @@ class SuperVisor(object):
                 #print 'total_services '+str(n)
                 stopped = 0
                 running = 0
+                flag = 0
 
                 for i in range(0,n):
                     name,status = map(str, os.popen('sudo supervisorctl status all').readlines()[i].split()[0:2])
@@ -112,8 +114,8 @@ class SuperVisor(object):
                         flag=1
                         running = running+1
                     #print  name + '_running_status '+ str(flag)
-                    metric = Metric(name+'_running_status', 'Running status of service','summary')
-                    metric.add_sample(name+'_running_status', value=flag, labels={})
+                    metric = Metric('child_running_status', 'Running status of service','summary')
+                    metric.add_sample('child_running_status', value=flag, labels={'supervisord_service': name})
                     yield metric
                 
                 #print "total_running_services: " + str(r)
